@@ -18,7 +18,7 @@ void setup(void){
   MQTT_init();
   mqtt_cli.publish("lab/leds/strip/state", "hello emqx");
   mqtt_cli.subscribe("lab/leds/strip/set_leds");
-  mqtt_cli.subscribe("lab/leds/strip/set_leds_byte");
+  mqtt_cli.subscribe("lab/leds/strip/set_leds_bytes");
   mqtt_cli.subscribe("lab/leds/strip/rotate_leds");
   
 }
