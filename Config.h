@@ -5,7 +5,7 @@ String passwordAP = "ESP8266123"; // пароль точки доступа
 //char* passwordCLI = "YOUR_PASS"; // пароль точки доступа
 
 char* ssidCLI = "";
-char* passwordCLI = ";
+char* passwordCLI = "";
 
 char* mqtt_broker = "broker.emqx.io";
 

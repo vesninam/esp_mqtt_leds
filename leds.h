@@ -45,6 +45,23 @@ int set_leds(byte *payload, unsigned int length) {
   return nleds;
 }
 
+int set_leds_bytes(byte *payload, unsigned int length) {
+  int nleds = (length/3);
+  nleds = nleds > NUM_LEDS ? NUM_LEDS : nleds;
+  for (int i = 0; i < nleds ; i++) {
+      int s = i * 3;
+      int r = payload[s]; 
+      int g = payload[s+1]; 
+      int b = payload[s+2]; 
+      //Serial.println(r);
+      //Serial.println(g);
+      //Serial.println(b);
+      leds[i] = CRGB(r, g, b);
+  }  
+  FastLED.show();
+  return nleds;
+}
+
 void rotate_leds() {
   CRGB first_led = leds[0];
   for (int i = 0; i < NUM_LEDS-1; i++) {

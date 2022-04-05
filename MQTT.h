@@ -17,6 +17,11 @@ void callback(char *topic, byte *payload, unsigned int length) {
       Serial.print("Set color for leds ");
       Serial.println(nleds);
     }
+    if (strcmp(topic, "lab/leds/strip/set_leds_bytes") == 0) {
+      int nleds = set_leds_byte(payload, length);
+      Serial.print("Set color for leds received in bytes");
+      Serial.println(nleds);
+    }
     if (strcmp(topic, "lab/leds/strip/rotate_leds") == 0) {
       rotate_leds();
     }
