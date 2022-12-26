@@ -16,10 +16,11 @@ void setup(void){
   WIFI_init(false);
   server_init();
   MQTT_init();
-  mqtt_cli.publish("lab/leds/strip/state", "hello emqx");
-  mqtt_cli.subscribe("lab/leds/strip/set_leds");
-  mqtt_cli.subscribe("lab/leds/strip/set_leds_bytes");
-  mqtt_cli.subscribe("lab/leds/strip/rotate_leds");
+  mqtt_cli.publish("lab/ESP8266_AC2A/strip/state", "hello emqx");
+  mqtt_cli.subscribe("lab/ESP8266_AC2A/strip/set_leds");
+  mqtt_cli.subscribe("lab/ESP8266_AC2A/strip/set_leds_bytes");
+  mqtt_cli.subscribe("lab/ESP8266_AC2A/strip/rotate_leds");
+  mqtt_cli.subscribe("lab/ESP8266_AC2A/range");
   
 }
 
