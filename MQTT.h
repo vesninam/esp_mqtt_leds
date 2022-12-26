@@ -12,18 +12,39 @@ void callback(char *topic, byte *payload, unsigned int length) {
     Serial.println(topic);
     Serial.print("With length: ");
     Serial.println(length);    
-    if (strcmp(topic, "lab/leds/strip/set_leds") == 0) {
+    if (strcmp(topic, "lab/ESP8266_AC2A/strip/set_leds") == 0) {
       int nleds = set_leds(payload, length);
       Serial.print("Set color for leds ");
       Serial.println(nleds);
     }
-    if (strcmp(topic, "lab/leds/strip/set_leds_bytes") == 0) {
+    if (strcmp(topic, "lab/ESP8266_AC2A/strip/set_leds_bytes") == 0) {
       int nleds = set_leds_bytes(payload, length);
       Serial.print("Set color for leds received in bytes");
       Serial.println(nleds);
     }
-    if (strcmp(topic, "lab/leds/strip/rotate_leds") == 0) {
+    if (strcmp(topic, "lab/ESP8266_AC2A/strip/rotate_leds") == 0) {
       rotate_leds();
+    }
+    if (strcmp(topic, "lab/ESP8266_AC2A/range") == 0) {
+      int power = 1;
+      int range = 0;
+      for(int i =length-1; i >= 0; i--) {
+        range = range + (payload[i] - '0') * power;
+        power = power * 10;
+      }
+      Serial.print("Range ");
+      Serial.println(range);
+      int nleds = int(range / 5);
+      for(int i=0; i < NUM_LEDS;i++) {
+        leds[i] = CRGB::Black; 
+        delay(1); 
+        FastLED.show();
+      }
+      for(int i=0; i < nleds;i++) {
+        leds[i] = CRGB::Blue; 
+        delay(1); 
+        FastLED.show();
+      }
     }
     Serial.println("-----------------------");
 }
