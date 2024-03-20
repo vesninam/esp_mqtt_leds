@@ -8,7 +8,7 @@ Execute code below BEFORE esp is up to see wether you can receive data FROM esp.
 
 ```py
 import time
-import paho.mqtt.client as paho
+import paho.mqtt.client as mqtt_client
 import random
 
 broker="broker.emqx.io"
@@ -18,7 +18,12 @@ def on_message(client, userdata, message):
     data = str(message.payload.decode("utf-8"))
     print("received message =", data)
 
-client= paho.Client("isu100123") 
+client = mqtt_client.Client('isu10012300')
+# FOR new version change ABOVE line to 
+#client = mqtt_client.Client(
+#    mqtt_client.CallbackAPIVersion.VERSION1, 
+#    'isu10012300'
+#)
 client.on_message=on_message
 
 print("Connecting to broker",broker)
@@ -34,12 +39,17 @@ client.loop_stop()
 Execute code below AFTER ESP is up to see wether you can receive data ON esp.
 ```py
 import time
-import paho.mqtt.client as client
+import paho.mqtt.client as mqtt_client
 import random
 
 broker="broker.emqx.io"
 
-client= client.Client('isu10012300')
+client = mqtt_client.Client('isu10012300')
+# FOR new version change ABOVE line to 
+#client = mqtt_client.Client(
+#    mqtt_client.CallbackAPIVersion.VERSION1, 
+#    'isu10012300'
+#)
 
 print("Connecting to broker",broker)
 print(client.connect(broker))
